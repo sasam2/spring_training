@@ -11,8 +11,7 @@
  <div id="contents">
 
         <div id="sidebar">
-        
-        
+               
         <c:if test="${loggedInUser!=null}">
         	<p align="right">Authenticated as 
         		<b><a href="portfolio/signout">${loggedInUser}</a></b>.

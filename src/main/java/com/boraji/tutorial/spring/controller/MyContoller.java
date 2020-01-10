@@ -31,6 +31,15 @@ public class MyContoller {
 	    model.addAttribute("message", "You are logged in as " + principal.getName());
 	    return "index";
 	}
+	
+	@GetMapping(value="/login")
+	public String login(Model model, Principal principal, HttpServletResponse httpServletResponse) {
+		if(principal != null) {
+			httpServletResponse.setHeader("Location", "logout");
+		    httpServletResponse.setStatus(302);
+		}
+	    return "login";
+	}
   
   	@RequestMapping(value = "/post_view", method = RequestMethod.GET)
   	public String post_view(Model model, Principal principal) {
@@ -85,9 +94,11 @@ public class MyContoller {
 	}  	
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public String signup_form(Model model, Principal principal) {
-		if(principal != null)
-  			model.addAttribute("loggedInUser", principal.getName());
+	public String signup_form(Model model, Principal principal, HttpServletResponse httpServletResponse) {
+		if(principal != null) {
+			httpServletResponse.setHeader("Location", "logout");
+		    httpServletResponse.setStatus(302);
+		}
   		
 		return "signup";
 	} 

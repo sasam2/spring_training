@@ -33,7 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     .and()
     .authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
     .and()
-    .formLogin();
+    .formLogin()
+    .loginPage("/login")
+    .permitAll()
+    .defaultSuccessUrl("/post_view", true);
     //.httpBasic(); // Authenticate users with HTTP basic authentication
   }
   
