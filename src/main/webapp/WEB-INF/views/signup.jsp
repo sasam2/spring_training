@@ -4,11 +4,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Sign up</title>
+<link href="resources/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<c:if test="${loggedInUser!=null}">Logged in as ${loggedInUser}.</c:if>
-<nav class="floating-menu">
+<div id="contents" >
+
+        <div id="sidebar">
+        
+        
+        <c:if test="${loggedInUser!=null}">
+        	<p align="right">Authenticated as 
+        		<b><a href="portfolio/signout">${loggedInUser}</a></b>.
+        	</p>
+        </c:if>
+        
+        </div><nav class="floating-menu">
     <h3>Menu</h3>
        <c:choose>
     <c:when test="${loggedInUser!=null}">
@@ -23,8 +34,8 @@
     <a href="post_view">View Posts</a>
     <a href="post_create">New Post</a>
 </nav>
-<h1>Sign up</h1>
 <div class="main">
+<h1>Sign up</h1>
 <form action="signup" method="post" class="message">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <p>
@@ -38,7 +49,7 @@
     <input type="submit" value="Sign up">
 </form>
 </div>
-
+</div>
 
 </body>
 </html>

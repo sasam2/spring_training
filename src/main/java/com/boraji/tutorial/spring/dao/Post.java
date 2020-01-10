@@ -2,8 +2,6 @@ package com.boraji.tutorial.spring.dao;
 
 import java.util.Date;
 
-import javax.print.attribute.standard.DateTimeAtCompleted;
-
 public class Post {
 	
 	private int id;

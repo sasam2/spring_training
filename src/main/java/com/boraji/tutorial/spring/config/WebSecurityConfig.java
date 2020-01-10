@@ -28,8 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-
-    http.authorizeRequests().antMatchers("/post_view", "/signup").permitAll()
+	  
+    http.authorizeRequests().antMatchers("/post_view", "/signup", "/resources/**").permitAll()
     .and()
     .authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
     .and()

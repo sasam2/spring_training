@@ -5,9 +5,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Spring Security JDBC Authentication Example</title>
+<link href="resources/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<c:if test="${loggedInUser!=null}">Logged in as ${loggedInUser}.</c:if>
+ <div id="contents">
+
+        <div id="sidebar">
+        
+        
+        <c:if test="${loggedInUser!=null}">
+        	<p align="right">Authenticated as 
+        		<b><a href="portfolio/signout">${loggedInUser}</a></b>.
+        	</p>
+        </c:if>
+        
+        </div>
 <nav class="floating-menu">
     <h3>Menu</h3>
     <c:choose>
@@ -22,13 +34,14 @@
     <a href="post_view">View Posts</a>
     <a href="post_create">New Post</a>
 </nav>
+<div class="main">
 <h1>Logout</h1>
 <h2>${message}</h2>
-<div class="main">
 <form action="logout" method="post" class="message">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Logout">
 </form>
+</div>
 </div>
 </body>
 </html>
