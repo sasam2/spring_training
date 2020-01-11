@@ -48,17 +48,6 @@ public class MyContoller {
   			model.addAttribute("loggedInUser", principal.getName());
   		//PostJDBCTemplate pJdbcTempl = (PostJDBCTemplate)context.getBean("postJDBCTemplate");
   		List<Post> ps = pJdbcTempl.listPosts();
-  		List<UserInfo> ui = pJdbcTempl.listUsers();
-  		
-  		for(Post p: ps) {
-  			int author_id = p.getAuthorId();
-  			for(UserInfo u: ui) {
-  				if(u.getId()==author_id) {
-  					p.setAuthorName(u.getUsername());
-  					break;
-  				}
-  			}
-  		}
   		model.addAttribute("posts", ps);
   		return "postsListDisplay";
   	}

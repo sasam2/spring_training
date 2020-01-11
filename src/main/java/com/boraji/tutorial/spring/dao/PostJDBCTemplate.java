@@ -17,14 +17,17 @@ public class PostJDBCTemplate {
 	  
 	  public PostJDBCTemplate(DataSource dataSource) {
 	     this.dataSource = dataSource;
-	     this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+	     this.jdbcTemplateObject = new JdbcTemplate(this.dataSource);
 	  }
 	  
 	  public List<Post> listPosts() {
-	      String SQL = "select * from display_post";
+	      String SQL = "select p.id, p.title, p.content, p.date, p.author_id, p.photo, u.username "
+	    		  + "from display_post p, users u where u.id=p.author_id "
+	    		  + "order by p.date desc";
 	      List <Post> posts = jdbcTemplateObject.query(SQL, new PostMapper());
 	      return posts;
 	  }
+	  
 	  public List<UserInfo> listUsers() {
 	      String SQL = "select * from users";
 	      List <UserInfo> users = jdbcTemplateObject.query(SQL, new UserMapper());
