@@ -47,7 +47,10 @@ public class MyContoller {
   		if(principal != null)
   			model.addAttribute("loggedInUser", principal.getName());
   		//PostJDBCTemplate pJdbcTempl = (PostJDBCTemplate)context.getBean("postJDBCTemplate");
-  		List<Post> ps = pJdbcTempl.listPosts();
+  		
+  		int maxId = pJdbcTempl.getPostLatestId();
+  		//List<Post> ps = pJdbcTempl.listPosts();
+  		List<Post> ps = pJdbcTempl.listPostsGreaterThanId(maxId, 2);
   		model.addAttribute("posts", ps);
   		return "postsListDisplay";
   	}

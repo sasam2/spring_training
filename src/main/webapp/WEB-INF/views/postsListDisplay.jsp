@@ -47,6 +47,9 @@
 			    <p> ${p.authorName}</p>
 			</c:forEach>
 		</ul>
+		  <div class="buttonHolder">
+        <button type="button" id="loadPostsButton" onclick="loadPosts('{{ user.get_username }}')">Load More</button>
+    </div>
 	</div>
 </div>
 
