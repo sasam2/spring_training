@@ -41,7 +41,7 @@ public class Post {
 	public void setAuthorName(String authorName) {
 		this.author_name=authorName;
 	}
-	public String getauthorName() {
+	public String getAuthorName() {
 		return this.author_name;
 	}
 	

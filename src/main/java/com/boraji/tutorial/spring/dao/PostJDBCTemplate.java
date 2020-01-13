@@ -45,12 +45,12 @@ public class PostJDBCTemplate {
 	      return postId;
 	  }
 	  
-	  public List<Post> listPostsGreaterThanId(int id, int nrPosts) {
+	  public List<Post> listPostsLessThanId(int id, int nrPosts) {
 	      String SQL = "select p.id, p.title, p.content, p.date, p.author_id, p.photo, u.username "
 	    		  + "from display_post p, users u where "
 	    		  + "u.id=p.author_id and "
 	    		  + "p.id <= "+id+" "
-	    		  + "order by p.date desc "
+	    		  + "order by p.id desc "
 	    		  + "limit 0, " + nrPosts;
 	      List <Post> posts = jdbcTemplateObject.query(SQL, new PostMapper());
 	      return posts;

@@ -5,6 +5,7 @@
 <head>
 	<title>The Posts</title>
 	<link href="resources/style.css" rel="stylesheet" type="text/css">
+	<script src="resources/main.js"></script>
 </head>
 
 <body>
@@ -48,7 +49,7 @@
 			</c:forEach>
 		</ul>
 		  <div class="buttonHolder">
-        <button type="button" id="loadPostsButton" onclick="loadPosts('{{ user.get_username }}')">Load More</button>
+        <button type="button" id="loadPostsButton" onclick="loadPosts('${loggedInUser}')">Load More</button>
     </div>
 	</div>
 </div>
