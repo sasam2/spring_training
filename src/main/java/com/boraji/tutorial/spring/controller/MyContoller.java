@@ -31,8 +31,10 @@ public class MyContoller {
 	PostJDBCTemplate pJdbcTempl;
 
 	@GetMapping("/")
-	public String index(Model model, Principal principal) {
+	public String index(Model model, Principal principal, HttpServletResponse httpServletResponse) {
 	    model.addAttribute("message", "You are logged in as " + principal.getName());
+	    httpServletResponse.setHeader("Location", "post_view");
+	    httpServletResponse.setStatus(302);
 	    return "index";
 	}
 	
@@ -72,7 +74,7 @@ public class MyContoller {
   				if(i != 0)jsonArr+=", ";
   				String jsonObj = "{";
 	  			jsonObj+="\"title\": \""+p.getTitle()+"\", ";
-	  			jsonObj+="\"photo\": \""+p.getPhoto()+"\", ";
+	  			//jsonObj+="\"photo\": \""+p.getPhoto()+"\", ";
 	  			jsonObj+="\"author\": \""+p.getAuthorName()+"\", ";
 	  			jsonObj+="\"content\": \""+p.getContent()+"\", ";
 	  			jsonObj+="\"date\": \""+p.getDate()+"\", ";

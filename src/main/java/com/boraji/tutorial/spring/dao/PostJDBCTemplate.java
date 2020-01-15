@@ -25,7 +25,7 @@ public class PostJDBCTemplate {
 	  }
 	  
 	  public List<Post> listPosts() {
-	      String SQL = "select p.id, p.title, p.content, p.date, p.author_id, p.photo, u.username "
+	      String SQL = "select p.id, p.title, p.content, p.date, p.author_id, u.username " //, p.photo
 	    		  + "from display_post p, users u where u.id=p.author_id "
 	    		  + "order by p.date desc";
 	      List <Post> posts = jdbcTemplateObject.query(SQL, new PostMapper());
@@ -46,7 +46,7 @@ public class PostJDBCTemplate {
 	  }
 	  
 	  public List<Post> listPostsLessThanId(int id, int nrPosts) {
-	      String SQL = "select p.id, p.title, p.content, p.date, p.author_id, p.photo, u.username "
+	      String SQL = "select p.id, p.title, p.content, p.date, p.author_id, u.username " //, p.photo
 	    		  + "from display_post p, users u where "
 	    		  + "u.id=p.author_id and "
 	    		  + "p.id <= "+id+" "
@@ -71,8 +71,8 @@ public class PostJDBCTemplate {
 	  
 	  public int addPost(Post p, int author_id) {
 		  int rAff = jdbcTemplateObject.update(
-				    "INSERT INTO display_post (title, content, author_id, date, photo) VALUES (?, ?, ?, SYSDATE(), ?)",
-				    p.getTitle(), p.getContent(), author_id, "/"
+				    "INSERT INTO display_post (title, content, author_id, date) VALUES (?, ?, ?, SYSDATE())",
+				    p.getTitle(), p.getContent(), author_id
 				);
 		  return rAff;
 	  }

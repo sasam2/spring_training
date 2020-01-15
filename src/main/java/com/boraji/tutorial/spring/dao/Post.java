@@ -7,7 +7,7 @@ public class Post {
 	private int id;
 	private String title;
 	private String content;
-	private String photo;
+	//private String photo;
 	private Date date;
 	private int author_id;
 	private String author_name;
@@ -26,9 +26,9 @@ public class Post {
 		this.content=content;
 	}
 	
-	public void setPhoto(String photoUrl) {
+	/*public void setPhoto(String photoUrl) {
 		this.photo=photoUrl;
-	}
+	}*/
 	
 	public void setDate(Date date) {
 		this.date=date;
@@ -54,9 +54,9 @@ public class Post {
 		return this.date;
 	}
 	
-	public String getPhoto() {
+	/*public String getPhoto() {
 		return this.photo;
-	}
+	}*/
 	
 	public String getTitle() {
 		return this.title;

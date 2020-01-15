@@ -42,7 +42,6 @@
 		    <c:forEach items="${posts}" var="p">
 			    <li id="${p.id}">
 			    <h2> ${p.title}</h2>
-			   	<img src="${p.photo}">
 			    <p> ${p.content}</p>
 			    <p> ${p.date}</p>
 			    <p> ${p.authorName}</p>
