@@ -45,6 +45,17 @@
 			    <p> ${p.content}</p>
 			    <p> ${p.date}</p>
 			    <p> ${p.authorName}</p>
+				<c:if test="${loggedInUser!=null && loggedInUser.equals(p.authorName)}">
+		        	<p align="right">Delete
+		        	
+		        	<form action="post_delete" method="post" class="message" onsubmit="return confirm('Do you really want to delete post ${p.title}?');">
+			        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    					<input type="hidden" name="post_id" value="${p.id}">
+			        	<input type="submit" value="Delete">
+		        	</form>;
+		        	
+		        	</p>
+        		</c:if>
 			</c:forEach>
 		</ul>
 		  <div class="buttonHolder">
