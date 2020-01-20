@@ -1,10 +1,12 @@
 package com.boraji.tutorial.spring.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.boraji.tutorial.spring.dao.Post;
 import com.boraji.tutorial.spring.dao.PostJDBCTemplate;
@@ -29,6 +32,9 @@ public class MyContoller {
 	
 	@Autowired
 	PostJDBCTemplate pJdbcTempl;
+	
+	@Autowired
+	ServletContext context;
 
 	@GetMapping("/")
 	public String index(Model model, Principal principal, HttpServletResponse httpServletResponse) {
@@ -74,7 +80,7 @@ public class MyContoller {
   				if(i != 0)jsonArr+=", ";
   				String jsonObj = "{";
 	  			jsonObj+="\"title\": \""+p.getTitle()+"\", ";
-	  			//jsonObj+="\"photo\": \""+p.getPhoto()+"\", ";
+	  			jsonObj+="\"photo\": \""+p.getPhoto()+"\", ";
 	  			jsonObj+="\"author\": \""+p.getAuthorName()+"\", ";
 	  			jsonObj+="\"content\": \""+p.getContent()+"\", ";
 	  			jsonObj+="\"date\": \""+p.getDate()+"\", ";
@@ -122,15 +128,40 @@ public class MyContoller {
 		return "postCreate";
 	}  	
   
-	@RequestMapping(value = "/post_create", method = RequestMethod.POST)
+	@RequestMapping(value = "/post_create", method = RequestMethod.POST, consumes=MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseBody
-	public void post_create(@ModelAttribute("post") Post post, HttpServletResponse httpServletResponse) {
+	public void post_create(@RequestParam("title") String title, 
+							@RequestParam("content") String content,
+							@RequestParam("image") MultipartFile image,
+							/* @ModelAttribute("post") Post post,*/
+	 						HttpServletResponse httpServletResponse) {
 		//System.out.println("NEW POST: "+post.getId()+" "+post.getTitle());
 		//PostJDBCTemplate pJdbcTempl = (PostJDBCTemplate)context.getBean("postJDBCTemplate");
+		
+		String absolutePath = context.getRealPath("resources/");		
+
+		 File transferImage = new File(absolutePath+"/"+image.getOriginalFilename()); 
+		 try {
+			image.transferTo(transferImage);
+			
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		Post p = new Post();
+		p.setTitle(title);
+		p.setContent(content);
+		p.setPhoto(image.getOriginalFilename());
+		
 		User principal = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = principal.getUsername();
 		UserInfo u = pJdbcTempl.getUser(username);
-		int rAff = pJdbcTempl.addPost(post, u.getId());
+		p.setAuthorId(u.getId());
+		
+		int rAff = pJdbcTempl.addPost(p);
 		//System.out.println("FORM ITEMS: "+post.getTitle()+" rAff="+rAff); //request.size()); //getParameter("title"));  //.size());
 		
 		httpServletResponse.setHeader("Location", "post_view");

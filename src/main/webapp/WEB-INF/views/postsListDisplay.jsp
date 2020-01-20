@@ -42,11 +42,14 @@
 		    <c:forEach items="${posts}" var="p">
 			    <li id="${p.id}">
 			    <h2> ${p.title}</h2>
+			    <c:if test="${!\"\".equals(p.photo)}">
+			    	<img src="resources/${p.photo}"></img>
+			    </c:if>
 			    <p> ${p.content}</p>
 			    <p> ${p.date}</p>
 			    <p> ${p.authorName}</p>
 				<c:if test="${loggedInUser!=null && loggedInUser.equals(p.authorName)}">
-		        	<p align="right">Delete
+		        	<p align="right">
 		        	
 		        	<form action="post_delete" method="post" class="message" onsubmit="return confirm('Do you really want to delete post ${p.title}?');">
 			        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>

@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.boraji.tutorial.spring.dao.PostJDBCTemplate;
 
@@ -36,4 +37,12 @@ public class AppConfig {
 	PostJDBCTemplate postJDBCTemplate = new PostJDBCTemplate(dataSource);
     return postJDBCTemplate;
   }
+  
+  @Bean(name = "filterMultipartResolver") //multipartResolver
+  public CommonsMultipartResolver multipartResolver() {
+      CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+      multipartResolver.setMaxUploadSize(1000000);
+      return multipartResolver;
+  }
+  
 }

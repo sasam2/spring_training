@@ -17,10 +17,11 @@ function loadPosts(username) {
             html += "<p><b>" + posts[i]['author']+"</b> on "+posts[i]['date']+" </p>";
 
             if (posts[i]['author']==username ){
-                 html += "<form action=\"/portfolio/post_delete/\" method=\"post\" class=\"message\" onsubmit=\"return confirm('Do you really want to delete post"+posts[i]['title']+"?');\">";
+                 html += "<p align=\"right\"><form action=\"/portfolio/post_delete/\" method=\"post\" class=\"message\" onsubmit=\"return confirm('Do you really want to delete post"+posts[i]['title']+"?');\">";
                  csrftoken = getCookie('csrftoken');
-                 html += "<input type='hidden' name='csrfmiddlewaretoken' value='"+csrftoken+"'/><input type=\"\hidden\" name=\"post_id\" value=\""+posts[i]['id']+"\"><input type=\"submit\" value=\"Delete\"></form>";
+                 html += "<input type='hidden' name='csrfmiddlewaretoken' value='"+csrftoken+"'/><input type=\"\hidden\" name=\"post_id\" value=\""+posts[i]['id']+"\"><input type=\"submit\" value=\"Delete\"></form></p>";
             }
+            html+="</li>"
         }
         document.getElementById("posts").innerHTML += html;
     }

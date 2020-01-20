@@ -37,7 +37,7 @@
 </nav>
 <div class="main">
 <h1>New Post</h1>
-<form action="post_create" method="post" class="message"> <!--   enctype="multipart/form-data" -->  
+<form action="post_create" method="post" class="message"   enctype="multipart/form-data" >  
     <table>
     <tr>
     	<th><label for="title">Title:</label></th>
@@ -47,8 +47,8 @@
 		<th><label for="content">Content:</label></th>
 		<td><textarea name="content" id="content" rows="10" cols="40" required></textarea></td>
 	</tr>
-<!-- tr><th><label for="id_image">Image:</label></th><td><input type="file" name="image" required id="id_image" /></td></tr>
- --> 
+<tr><th><label for="image">Image:</label></th><td><input type="file" name="image" required id="image" /></td></tr>
+ 
     </table>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="submit" value="Create">
