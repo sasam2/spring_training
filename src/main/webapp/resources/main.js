@@ -10,7 +10,7 @@ function loadPosts(username) {
         for (var i=0; i < posts.length; i++){
             html += "<li id=" + posts[i]['id'] + ">";
             html += "<h2>" + posts[i]['title']+"</h2>";
-            if(posts[i]['photo']!=null){
+            if(posts[i]['photo']!=null && posts[i]['photo']!=""){
                 html += "<img src=\"resources\\" + posts[i]['photo']+"\">";
             }
             html += "<p>" + posts[i]['content']+" </p>";
