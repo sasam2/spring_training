@@ -11,7 +11,7 @@ function loadPosts(username) {
             html += "<li id=" + posts[i]['id'] + ">";
             html += "<h2>" + posts[i]['title']+"</h2>";
             if(posts[i]['photo']!=null){
-                html += "<img src=\"\\media\\" + posts[i]['photo']+"\">";
+                html += "<img src=\"resources\\" + posts[i]['photo']+"\">";
             }
             html += "<p>" + posts[i]['content']+" </p>";
             html += "<p><b>" + posts[i]['author']+"</b> on "+posts[i]['date']+" </p>";
@@ -30,7 +30,7 @@ function loadPosts(username) {
   var minId=Number(postElems[postElems.length-1].id);
   //document.getElementById("demo").innerHTML += "</br>"+minId+"</br>"
   xhttp.open('GET', 'portfolio/post_view?lastPost='+minId, true);
-  xhttp.open('GET', 'post_view?lastPost=5', true);
+  xhttp.open('GET', 'post_view?lastPost='+minId, true);
   xhttp.send();
 };
 function getCookie(name) {
