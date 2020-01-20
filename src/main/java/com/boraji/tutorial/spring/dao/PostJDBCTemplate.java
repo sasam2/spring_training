@@ -25,7 +25,7 @@ public class PostJDBCTemplate {
 	  }
 	  
 	  public List<Post> listPosts() {
-	      String SQL = "select p.id, p.title, p.content, p.date, p.author_id, u.username " //, p.photo
+	      String SQL = "select p.id, p.title, p.content, p.date, p.author_id, u.username, p.photo "
 	    		  + "from display_post p, users u where u.id=p.author_id "
 	    		  + "order by p.date desc";
 	      List <Post> posts = jdbcTemplateObject.query(SQL, new PostMapper());
